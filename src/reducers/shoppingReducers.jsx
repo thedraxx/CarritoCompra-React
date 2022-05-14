@@ -35,12 +35,32 @@ export function shoppingReducer(state, action) {
           { ...state, cart: [...state.cart, { ...newItem, quantity: 1 }] };
     }
     case types.REMOVE_ONE_FROM_CART: {
+      let itemCart = state.cart.find(
+        (products) => products.id === action.payload
+      );
+      return itemCart.quantity > 1
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === itemCart.id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: state.cart.filter((item) => item.id !== action.payload),
+          };
     }
 
     case types.REMOVE_ALL_FROM_CART: {
-      return { ...state, cart: [] };
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload),
+      };
     }
     case types.CLEAR_CART: {
+      return { ...state, cart: [] };
     }
 
     default:

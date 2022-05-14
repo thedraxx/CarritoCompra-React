@@ -14,11 +14,15 @@ export const ShoppingCart = () => {
     // console.log(id);
     dispatch({ type: "ADD TO CART", payload: id });
   };
-  const delFromCart = () => {};
-  const clearCart = () => {
-    dispatch({ type: "REMOVE ALL FROM CART"});
+  const delFromCart = (id) => {
+    dispatch({ type: "REMOVE ONE FROM CART", payload: id });
   };
-
+  const clearCart = () => {
+    dispatch({ type: "CLEAR CART" });
+  };
+  const delAll = (id) => {
+    dispatch({ type: "REMOVE ALL FROM CART",payload: id });
+  };
   return (
     <div>
       <h3>Carrito de Compra</h3>
@@ -32,7 +36,12 @@ export const ShoppingCart = () => {
       <article className="box">
         <button onClick={clearCart}>Limpiar Cartito</button>
         {cart.map((item, index) => (
-          <CartItem key={index} data={item} delFromCart={delFromCart} clearCart={clearCart} />
+          <CartItem
+            key={index}
+            data={item}
+            delFromCart={delFromCart}
+            delAll={delAll}
+          />
         ))}
       </article>
     </div>
