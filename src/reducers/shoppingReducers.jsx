@@ -14,6 +14,7 @@ export const shoppingInitialState = {
 
 export function shoppingReducer(state, action) {
   switch (action.type) {
+    
     case types.ADD_TO_CART: {
       let newItem = state.products.find(
         (products) => products.id === action.payload
@@ -34,15 +35,16 @@ export function shoppingReducer(state, action) {
         : //Si no tiene el item entonces hace esto
           { ...state, cart: [...state.cart, { ...newItem, quantity: 1 }] };
     }
+
     case types.REMOVE_ONE_FROM_CART: {
-      let itemCart = state.cart.find(
+      let itemToDelete= state.cart.find(
         (products) => products.id === action.payload
       );
-      return itemCart.quantity > 1
+      return itemToDelete.quantity > 1
         ? {
             ...state,
             cart: state.cart.map((item) =>
-              item.id === itemCart.id
+              item.id === action.payload
                 ? { ...item, quantity: item.quantity - 1 }
                 : item
             ),
@@ -59,8 +61,9 @@ export function shoppingReducer(state, action) {
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
     }
+
     case types.CLEAR_CART: {
-      return { ...state, cart: [] };
+      return shoppingInitialState;
     }
 
     default:
