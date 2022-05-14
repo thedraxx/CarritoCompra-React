@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CartItem = ({ data, delFromCart, delAll }) => {
+export const CartItem = ({ data, delFromCart, delAllFromCart }) => {
   let { id, name, price, quantity } = data;
 
   return (
@@ -10,7 +10,7 @@ export const CartItem = ({ data, delFromCart, delAll }) => {
         Precio: {price}.00 x {quantity} = ${price * quantity}.00
       </h5>
       <button onClick={() => delFromCart(id)}>Eliminar</button>
-      <button onClick={() => delAll(id)}>Eliminar Todos</button>
+      <button onClick={() => delAllFromCart(id)}>Eliminar Todos</button>
     </div>
   );
 };

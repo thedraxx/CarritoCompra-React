@@ -17,11 +17,13 @@ export const ShoppingCart = () => {
   const delFromCart = (id) => {
     dispatch({ type: "REMOVE ONE FROM CART", payload: id });
   };
+
+  const delAllFromCart = (id) => {
+    dispatch({ type: "REMOVE ALL FROM CART",payload: id });
+  };
+
   const clearCart = () => {
     dispatch({ type: "CLEAR CART" });
-  };
-  const delAll = (id) => {
-    dispatch({ type: "REMOVE ALL FROM CART",payload: id });
   };
   return (
     <div>
@@ -40,7 +42,7 @@ export const ShoppingCart = () => {
             key={index}
             data={item}
             delFromCart={delFromCart}
-            delAll={delAll}
+            delAllFromCart={delAllFromCart}
           />
         ))}
       </article>
